@@ -7,12 +7,12 @@
         
     </h:head>
     <h:body>
+        <h:form> 
         <p:inputText value="#{centroController.centros.nombrecentro}"/> 
-       
-         <p:inputText value="#{centroController.centros.desccentro}"/> 
+        <p:inputText value="#{centroController.centros.desccentro}"/> 
         <p:inputText value="#{centroController.centros.estadocentro}"/> 
-        
         <p:commandButton actionListener="#{centroController.registrar()}"/>
+        </h:form>
     </h:body>
 </html>
 
