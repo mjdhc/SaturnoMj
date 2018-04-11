@@ -7,12 +7,12 @@
         
     </h:head>
     <h:body>
-        <p:inputText value="#{centroController.centros.nombrecentro}"/> 
-       
-         <p:inputText value="#{centroController.centros.desccentro}"/> 
-        <p:inputText value="#{centroController.centros.estadocentro}"/> 
-        
-        <p:commandButton actionListener="#{centroController.registrar()}"/>
+        <h:form> 
+            <p:inputText value="#{mjCentroTController.center.nombrecentro}"/> 
+            <p:inputText value="#{mjCentroTController.center.desccentro}"/> 
+            <p:inputText value="#{mjCentroTController.center.estadocentro}"/> 
+            <p:commandButton actionListener="#{mjCentroTController.register()}"/>
+        </h:form>
     </h:body>
 </html>
 
