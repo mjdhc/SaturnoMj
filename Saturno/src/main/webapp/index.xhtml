@@ -1,18 +1,172 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        
-    </h:head>
-    <h:body>
-        <h:form> 
-            <p:inputText value="#{mjCentroTController.center.nombrecentro}"/> 
-            <p:inputText value="#{mjCentroTController.center.desccentro}"/> 
-            <p:inputText value="#{mjCentroTController.center.estadocentro}"/> 
-            <p:commandButton actionListener="#{mjCentroTController.register()}"/>
-        </h:form>
-    </h:body>
-</html>
 
+    <h:head>
+        <title>Ministerio de Justicia</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </h:head>
+
+    <body>
+
+
+        <header> <h:outputLink class="conatainer_image"
+                               value="javascript:void(0)" style="float:left;"
+                               onclick="PF('dlg').show();" title="login">
+                <p:graphicImage id="logo" value="/resources/images/minjusticia.jpg" />
+            </h:outputLink>
+
+            <div class="" id="container_header">
+
+                <div class="container_headers_title">
+                    <span>SISTEMA DE ASIGNACIÓN DE TURNOS ASP</span>
+                </div>
+                <div class="container_headers_title2">
+                    <span>SATURNO</span>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="login_wraper">
+
+            <h:form>
+                <p:growl id="msgs" showDetail="true" />
+
+                <p:panel header="Ingrese su clave y contraseña" style="margin-bottom:10px;">
+                    <h:panelGrid columns="2" cellpadding="4">
+
+
+
+                        <p:outputLabel for="username" value="Usuario:" />
+                        <p:inputText id="username" value="#{mjUsuarioTController.user.usuario}" required="true"
+                                     label="usuario" />
+
+                        <p:outputLabel for="password" value="Contraseña: " />
+                        <p:password id="password" value="#{mjUsuarioTController.user.clave}" required="true" label="Contraseña"/>
+                        <h:column/>
+                        <p:commandButton value="Ingresar" update="msgs"
+                                         action="#{mjUsuarioTController.validateUser()}" 
+                                         icon="ui-icon-check" />
+
+                        <a href="home.xhtml" data-toggle="collapse"
+                           data-target="#lavelUser"><i class="fa fa-male"></i>Asignación
+                            de Turnos</a>
+                    </h:panelGrid>
+
+                    <p:separator />
+
+
+                </p:panel>
+            </h:form>
+
+
+
+        </div>
+
+
+
+        <div id="footer">
+            <p>
+                <b>Copyright (c) 2018 Sistema todos los derechos reservados. </b> <a
+                    href="http://www.justicia.gob.ec">Ministerio de Justicia,
+                    Derechos Humanos y Cultos | Ecuador </a>.
+            </p>
+        </div>
+
+
+
+
+
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                } else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+        <style>
+            #footer {
+                height: 30px;
+                margin: 0 auto;
+                padding: 0px 0 5px 0;
+                background: #D8E7FE;
+                border-top: 1px solid #D3DEF0;
+                font-family: Arial, Helvetica, sans-serif;
+                position: absolute;
+                right: 0;
+                bottom: 35px;
+                left: 0;
+                text-align: center;
+            }
+
+            #footer p {
+                margin: 0;
+                padding-top: 20px;
+                line-height: normal;
+                font-size: 10px;
+                text-transform: uppercase;
+                text-align: center;
+                color: #A0A0A0;
+            }
+
+            #footer a {
+                color: #5389E0;
+            }
+
+            #logo {
+                width: 26%;
+            }
+
+            .container_headers_title {
+                width: 40%;
+                display: inline;
+                position: relative;
+                top: -137px;
+                left: 34%;
+                font-size: 30px;
+                font-weight: bold;
+                color: #999997;
+            }
+
+            .container_headers_title2 {
+                position: relative;
+                display: inline;
+                font-weight: bold;
+                color: #999997;
+                font-size: 27px;
+                top: -98px;
+            }
+
+            body>div {
+                margin: 2% auto auto auto;
+                text-align: -webkit-center
+            }
+
+            .login_wraper {
+                border: 1px solid #999997;
+                border-radius: 10px;
+                width: 28%;
+                height: 177px;
+            }
+
+            #frm_container {
+                margin-top: 41px;
+            }
+
+            .conatainer_image {
+                border-bottom: 1px solid #999997;
+            }
+        </style>
+
+
+    </body>
+
+
+</html>

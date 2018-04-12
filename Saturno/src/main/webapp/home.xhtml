@@ -25,21 +25,137 @@
                     Footer
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                <p:layoutUnit position="west" size="260" header="Menu" collapsible="true">
+                    <p:accordionPanel style="font-size:12px" multiple="true"
+                                      activeIndex="-" cache="false" dynamic="true">
+                        <p:tab title="Distribución y Asignación de Asp">
+                            <p:accordionPanel multiple="true" activeIndex="-" cache="false"
+                                              dynamic="true">
+                                <p:tab title="Guardia">
+                                    <a href="ListAsp.xhtml" data-toggle="collapse"
+                                       data-target="#lavelUser"><i class="fa fa-male"></i>Asignación
+                                        de Turnos</a>
+                                </p:tab>
+                                <p:tab title="Retenes">
+                                    <a href="listAspReten.xhtml" data-toggle="collapse"
+                                       data-target="#lavelUser"><i class="fa fa-male"></i>Asignación
+                                        de Turnos Retenes</a>
+                                </p:tab>
 
-                        </p:submenu>
+                            </p:accordionPanel>
+                        </p:tab>
+                        <p:tab title="Reasignación de Turnos">
+                            <p:accordionPanel>
+                                <p:tab title="Guardia">
+                                    <a href="ListAspReasignationGuardian.xhtml"
+                                       data-toggle="collapse" data-target="#lavelUser"><i
+                                            class="fa fa-male"></i>Reasignación Guardia</a>
+                                </p:tab>
+                                <p:tab title="Retenes">
+                                    <a href="listAspRetenReasignation.xhtml" data-toggle="collapse"
+                                       data-target="#lavelUser"><i class="fa fa-male"></i>Reasignación
+                                        Reten</a>
+                                </p:tab>
 
-                    </p:menu>
+                            </p:accordionPanel>
+                        </p:tab>
+                        <p:tab title="Aprobación de Reasignación ">
+                            <p:accordionPanel>
+                                <p:tab title="Guardia">
+                                    <a href="ListAspReasignationGuardianApprobation.xhtml"
+                                       data-toggle="collapse" data-target="#lavelUser"><i
+                                            class="fa fa-male"></i>Aprobación Guardia</a>
+                                </p:tab>
+                                <p:tab title="Retenes">
+                                    <a href="listAspRetenReasignationApprobation.xhtml"
+                                       data-toggle="collapse" data-target="#lavelUser"><i
+                                            class="fa fa-male"></i>Aprobación Reten</a>
+                                </p:tab>
+
+                            </p:accordionPanel>
+                        </p:tab>
+                        <p:tab title="Administración">
+                            <p:accordionPanel multiple="true" activeIndex="-" cache="false"
+                                              dynamic="true">
+                                <p:tab title="Roles">
+
+                                </p:tab>
+                                <p:tab title="Usuarios">
+                                    <a href="users.xhtml" data-toggle="collapse"
+                                       data-target="#lavelUser"><i class="fa fa-male"></i>Usuarios</a>
+                                </p:tab>
+                                <p:tab title="Listas de Asp">
+
+                                </p:tab>
+                                <p:tab title="Roles">
+
+                                </p:tab>
+                                <p:tab title="Centros CRS">
+                                    <a href="centers.xhtml" data-toggle="collapse"
+                                       data-target="#lavelUser"><i class="fa fa-male"></i>Lista Centros CRS </a>
+                                </p:tab>
+
+                                <p:tab title="Configuración de Horarios ">
+
+                                </p:tab>
+
+                            </p:accordionPanel>
+                        </p:tab>
+                        <p:tab title="Estructura y Configuración  del     Centro  ">
+
+                            <p:accordionPanel>
+                                <p:tab title="Lugares y Guardianía">
+                                    <p:accordionPanel>
+                                        <p:tab title="Control General">
+
+                                        </p:tab>
+                                        <p:tab title="Etapa Mínima">
+
+
+                                        </p:tab>
+                                        <p:tab title="Etapa Mediana">
+
+
+                                        </p:tab>
+                                        <p:tab title="Etapa Máxima">
+
+                                        </p:tab>
+                                        <p:tab title="Etapa Femenino">
+
+                                        </p:tab>
+
+                                    </p:accordionPanel>
+
+                                </p:tab>
+                                <p:tab title="Retenes y Actividades">
+
+                                </p:tab>
+
+
+                            </p:accordionPanel>
+
+
+
+                        </p:tab>
+                        <p:tab title="Reportes">
+                            <p:accordionPanel>
+                                <p:tab title="Reporte Etapa Minima">
+
+                                </p:tab>
+
+
+                            </p:accordionPanel>
+                        </p:tab>
+
+                    </p:accordionPanel>
+
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                   
+                    <ui:insert name="content">
+                        Content
+                    </ui:insert>
                 </p:layoutUnit>
 
             </p:layout>
