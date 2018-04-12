@@ -28,5 +28,17 @@ public class MjUsuarioTFacade extends AbstractFacade<MjUsuarioT> implements MjUs
     public MjUsuarioTFacade() {
         super(MjUsuarioT.class);
     }
-    
+
+    public MjUsuarioT login() {
+        MjUsuarioT usuer = null;
+        String query;
+        try {
+            query = "select * from mj_usuario_t u where u.usuario='suarezf' and u.clave='12345'";
+        } catch (Exception e) {
+        } finally {
+
+        }
+        return null;
+    }
+
 }
