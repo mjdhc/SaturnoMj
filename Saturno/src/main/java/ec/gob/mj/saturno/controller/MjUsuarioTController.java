@@ -18,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.persistence.Query;
 
 @Named
 @ViewScoped
@@ -55,37 +56,21 @@ public class MjUsuarioTController implements Serializable {
         }
     }
 
-//    public String validateUser() {
-//
-//        FacesMessage msg;
-//
-//        if (verificarUsuario()) {
-//
-//            return "home?faces-redirect=true";
-//        }
-//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario", "El usuario o la contraseña no son los correctos"));
-//        System.out.println("Credenciales Fallidas");
-//        return "login";
-//    }
+    public String loginSession() {
+        String redirection = null;
+        try {
+            if (UsersEJB.login(user) != null) {
+                redirection = "home?faces-redirect=true";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "No existe usuario"));
+                redirection = "index";
+            }
 
-//    private boolean verificarUsuario() {
-//        boolean flagFindUser = false;
-//
-//        try {
-//            UserImplementDAO userIDao = new UserImplementDAO();
-//
-//            Usuario u = userIDao.getUserKey(this.user, this.password);
-//            if (u != null) {
-//                // System.out.println(" find UserBean: "+u.getUsuario());
-//                flagFindUser = true;
-//            }
-//
-//        } catch (Exception e) {
-//
-//            System.out.println("Error find UserBean: " + e.getMessage());
-//            flagFindUser = false;
-//        }
-//        return flagFindUser;
-//    }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error"));
+            redirection = "index";
+        }
 
+        return redirection;
+    }
 }

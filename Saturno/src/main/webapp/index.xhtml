@@ -8,6 +8,7 @@
     <h:head>
         <title>Ministerio de Justicia</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
 
     <body>
@@ -49,12 +50,8 @@
                         <p:password id="password" value="#{mjUsuarioTController.user.clave}" required="true" label="Contraseña"/>
                         <h:column/>
                         <p:commandButton value="Ingresar" update="msgs"
-                                         action="#{mjUsuarioTController.validateUser()}" 
+                                         action="#{mjUsuarioTController.loginSession()}" 
                                          icon="ui-icon-check" />
-
-                        <a href="home.xhtml" data-toggle="collapse"
-                           data-target="#lavelUser"><i class="fa fa-male"></i>Asignación
-                            de Turnos</a>
                     </h:panelGrid>
 
                     <p:separator />
@@ -91,81 +88,6 @@
                 }
             }
         </script>
-        <style>
-            #footer {
-                height: 30px;
-                margin: 0 auto;
-                padding: 0px 0 5px 0;
-                background: #D8E7FE;
-                border-top: 1px solid #D3DEF0;
-                font-family: Arial, Helvetica, sans-serif;
-                position: absolute;
-                right: 0;
-                bottom: 35px;
-                left: 0;
-                text-align: center;
-            }
-
-            #footer p {
-                margin: 0;
-                padding-top: 20px;
-                line-height: normal;
-                font-size: 10px;
-                text-transform: uppercase;
-                text-align: center;
-                color: #A0A0A0;
-            }
-
-            #footer a {
-                color: #5389E0;
-            }
-
-            #logo {
-                width: 26%;
-            }
-
-            .container_headers_title {
-                width: 40%;
-                display: inline;
-                position: relative;
-                top: -137px;
-                left: 34%;
-                font-size: 30px;
-                font-weight: bold;
-                color: #999997;
-            }
-
-            .container_headers_title2 {
-                position: relative;
-                display: inline;
-                font-weight: bold;
-                color: #999997;
-                font-size: 27px;
-                top: -98px;
-            }
-
-            body>div {
-                margin: 2% auto auto auto;
-                text-align: -webkit-center
-            }
-
-            .login_wraper {
-                border: 1px solid #999997;
-                border-radius: 10px;
-                width: 28%;
-                height: 177px;
-            }
-
-            #frm_container {
-                margin-top: 41px;
-            }
-
-            .conatainer_image {
-                border-bottom: 1px solid #999997;
-            }
-        </style>
-
-
     </body>
 
 

@@ -29,5 +29,6 @@ public interface MjUsuarioTFacadeLocal {
     List<MjUsuarioT> findRange(int[] range);
 
     int count();
+    MjUsuarioT login(MjUsuarioT usr);
     
 }

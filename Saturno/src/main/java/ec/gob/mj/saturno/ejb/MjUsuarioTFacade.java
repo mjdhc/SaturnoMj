@@ -6,9 +6,11 @@
 package ec.gob.mj.saturno.ejb;
 
 import ec.gob.mj.saturno.entities.MjUsuarioT;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,16 +31,24 @@ public class MjUsuarioTFacade extends AbstractFacade<MjUsuarioT> implements MjUs
         super(MjUsuarioT.class);
     }
 
-    public MjUsuarioT login() {
-        MjUsuarioT usuer = null;
-        String query;
+    @Override
+    public MjUsuarioT login(MjUsuarioT usr) {
+        MjUsuarioT user=null;
+        String _query;
         try {
-            query = "select * from mj_usuario_t u where u.usuario='suarezf' and u.clave='12345'";
+            _query = "SELECT u FROM MjUsuarioT u WHERE u.usuario= ?1 AND u.clave= ?2 ";
+            Query query = em.createQuery(_query);
+            query.setParameter(1, usr.getUsuario());
+            query.setParameter(2, usr.getClave());
+            List<MjUsuarioT> list_users = query.getResultList();
+            if (!list_users.isEmpty()) {
+                user = list_users.get(0);
+            }
         } catch (Exception e) {
-        } finally {
-
+            System.out.println("Error"+e.getMessage());
+            user = null;
         }
-        return null;
+        return user;
     }
 
 }
