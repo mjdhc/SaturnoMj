@@ -43,11 +43,14 @@
         
        	
        	
+<!-- https://mvnrepository.com/artifact/org.primefaces.extensions/all-themes -->
 <dependency>
-	<groupId>org.primefaces.themes</groupId>
-	<artifactId>all-themes</artifactId>
-	<version>1.0.8</version>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>all-themes</artifactId>
+    <version>1.0.8</version>
+    <type>pom</type>
 </dependency>
+
 
        
         

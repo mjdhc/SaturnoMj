@@ -15,49 +15,135 @@
                     xmlns:p="http://primefaces.org/ui"
                     xmlns:pe="http://primefaces.org/ui/extensions">
         <ui:define name="content">
-            <h:form id="fmrDataUser">
-        
-                <h:panelGrid columns="2" style="float: left;" >                      
-                        <p:outputLabel for="console" value="Basic:" />
-                        <p:selectOneMenu id="console" value="" >
-                            <f:selectItem itemLabel="Select One" itemValue="" />
-                            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                            <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            <p:fieldset legend="Datos del Usuario">
+                <h:form id="fmrDataUser" style="font-size:12px">                  
+                    <p:messages id="msgs" autoUpdate="true" />
+                    <h:panelGrid columns="3" style="float: left;" id="fielsetUserd1">
+                        
+                        
+                        <p:outputLabel for="center" value="Centro:" />
+                        <p:selectOneMenu id="center" value="#{mjUsuarioTController.center.idcentro}" style="width: 150px;" required="true">
+                            <f:selectItem itemLabel="Seleccione una opción" itemValue="" />
+                            <f:selectItem itemLabel="CRS Cotopaxi" itemValue="1" />
                         </p:selectOneMenu>
+                        <p:message for="center"/>
 
-                        <p:outputLabel value="Rol"/>
-                        <p:inputText id="txtNameUser"/>
+                        <p:outputLabel for="rol" value="Rol:" />
+                        <p:selectOneMenu id="rol" value="" style="width: 150px;"  required="true">
+                            <f:selectItem itemLabel="Seleccione una opción" itemValue="" />
+                            <f:selectItem itemLabel="Adminsitrador Tecnológico" itemValue="tecnologicAdmin" />                            
+                        </p:selectOneMenu>
+                        <p:message for="rol"/>
 
-                        <p:outputLabel value="Nombres"/>
-                        <p:inputText id="txtNameUser"/>
+                        <p:outputLabel value="Nombres" for="txtNameUser"/>
+                        <p:inputText id="txtNameUser" required="true"/>
+                        <p:message for="txtNameUser"/>
 
-                        <p:outputLabel value="Apellidos"/>
-                        <p:inputText id="txtLastnamer"/>
+                        <p:outputLabel value="Apellidos" for="txtLastnamer"/>
+                        <p:inputText id="txtLastnamer" required="true"/>
+                        <p:message for="txtLastnamer"/>
 
-                        <p:outputLabel value="Sexo"/>
-                        <p:selectOneRadio>
+                        <p:outputLabel value="Sexo" for="gender"/>
+                        <p:selectOneRadio id="gender" required="true">
                             <f:selectItem itemValue="M" itemLabel="Masculino"/>
                             <f:selectItem itemValue="F" itemLabel="Femenino"/>
-                        </p:selectOneRadio>                     
+                        </p:selectOneRadio> 
+                        <p:message for="gender" />
 
+                       <p:commandButton actionListener="#{mjCentroTController.register()}" icon="ui-icon-check" value="Crear" update="fielsetUserd1, fielsetUserd2"/>
                     </h:panelGrid> 
+                    <h:panelGrid columns="3" style="float: left;" id="fielsetUserd2">
 
-                    <h:panelGrid columns="2" style="float: left; margin-left: 15px;">
-                        <p:outputLabel value="Usuario"/>
-                        <p:inputText id="txtuser"/>
+                        <p:outputLabel value="Usuario:" for="txtUserNick"/>
+                        <p:inputText id="txtUserNick" required="true"/>
+                        <p:message for="txtUserNick"/>
 
-                        <p:outputLabel value="Contraseña"/>
-                        <p:password id="txtpass1"/>
 
-                        <p:outputLabel value="Confirmación de Contraseña"/>
-                        <p:password id="txtpass2"/>
+                        <p:outputLabel value="Contraseña:" for="passUserNick"/>
+                        <p:password id="passUserNick" match="passUserConfirm" feedback="true" promptLabel="Ingrese contraseña" validatorMessage="Las contraseñas no coinciden."
+                                    weakLabel="Débil" strongLabel="Fuerte" goodLabel="Bueno" required="true"/>
+                        <p:message for="passUserNick"/>
 
-                    </h:panelGrid> 
-  
-            </h:form>
-            
-         
+
+                        <p:outputLabel value="Repetir Contraseña" for="passUserConfirm"/>
+                        <p:password id="passUserConfirm" required="true" />
+                        <p:message for="passUserConfirm"/>
+
+                    </h:panelGrid>
+
+ 
+
+                </h:form>
+            </p:fieldset>
+            <p:fieldset legend="Lista de Usuarios">
+                <h:form id="form" style="font-size:12px">
+                    <p:growl id="msgs" showDetail="true"/>
+
+                    <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Lista de Usuarios
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+
+                        <p:column headerText="Código">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Centro">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{car.year}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Rol">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.brand}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Nombres">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                          <p:column headerText="Apellidos">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                    </p:dataTable>
+
+
+                </h:form>
+            </p:fieldset>
+
+
+
         </ui:define>      
 
     </ui:composition>	

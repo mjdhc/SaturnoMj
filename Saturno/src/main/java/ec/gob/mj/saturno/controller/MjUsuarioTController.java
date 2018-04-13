@@ -10,6 +10,8 @@ package ec.gob.mj.saturno.controller;
  * @author Odilo Ipiales
  */
 import ec.gob.mj.saturno.ejb.MjUsuarioTFacadeLocal;
+import ec.gob.mj.saturno.entities.MjCentroT;
+import ec.gob.mj.saturno.entities.MjRolT;
 import ec.gob.mj.saturno.entities.MjUsuarioT;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -27,6 +29,28 @@ public class MjUsuarioTController implements Serializable {
     @EJB
     private MjUsuarioTFacadeLocal UsersEJB;
     private MjUsuarioT user;
+    private MjRolT rol;
+    private MjCentroT center;
+
+    
+    public MjCentroT getCenter() {
+        return center;
+    }
+
+    /*Getter and Setter*/
+    public void setCenter(MjCentroT center) {    
+        this.center = center;
+    }
+
+    public MjRolT getRol() {
+        return rol;
+    }
+
+    public void setRol(MjRolT rol) {
+        this.rol = rol;
+    }
+
+ 
 
     public MjUsuarioTFacadeLocal getUsersEJB() {
         return UsersEJB;
@@ -54,6 +78,16 @@ public class MjUsuarioTController implements Serializable {
             UsersEJB.create(user);
         } catch (Exception e) {
         }
+    }
+    
+    public void createUser(){
+        try {
+            this.user.setIdcentro(center);
+            this.user.setIdrol(rol);
+            UsersEJB.create(user);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Aviso","Usuario Creado Exitossamente"));
+        } catch (Exception e) {
+        }FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error","Error al crear Usuario"));
     }
 
     public String loginSession() {

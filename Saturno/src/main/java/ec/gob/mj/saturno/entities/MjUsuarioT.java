@@ -8,6 +8,7 @@ package ec.gob.mj.saturno.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,7 +65,7 @@ public class MjUsuarioT implements Serializable {
     @OneToMany(mappedBy = "idusuario")
     private Collection<MjReasignacionT> mjReasignacionTCollection;
     @JoinColumn(name = "idcentro", referencedColumnName = "idcentro")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private MjCentroT idcentro;
     @JoinColumn(name = "idrol", referencedColumnName = "idrol")
     @ManyToOne

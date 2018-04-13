@@ -9,6 +9,7 @@
         <title>Ministerio de Justicia</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="style.css"/>
+       <!-- <h:outputScript library="js" name="script_test.js" />-->
     </h:head>
 
     <body>
@@ -33,14 +34,11 @@
 
 
         <div class="login_wraper">
-
             <h:form>
                 <p:growl id="msgs" showDetail="true" />
                 <p:messages autoUpdate=""/>
                 <p:panel header="Ingrese su clave y contraseña" style="margin-bottom:10px;">
                     <h:panelGrid columns="2" cellpadding="4">
-
-
 
                         <p:outputLabel for="username" value="Usuario:" />
                         <p:inputText id="username" value="#{mjUsuarioTController.user.usuario}" required="true"
@@ -53,10 +51,7 @@
                                          action="#{mjUsuarioTController.loginSession()}" 
                                          icon="ui-icon-check" />
                     </h:panelGrid>
-
                     <p:separator />
-
-
                 </p:panel>
             </h:form>
 
