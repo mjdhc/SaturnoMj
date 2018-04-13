@@ -15,7 +15,49 @@
                     xmlns:p="http://primefaces.org/ui"
                     xmlns:pe="http://primefaces.org/ui/extensions">
         <ui:define name="content">
-            Usuarios
+            <h:form id="fmrDataUser">
+        
+                <h:panelGrid columns="2" style="float: left;" >                      
+                        <p:outputLabel for="console" value="Basic:" />
+                        <p:selectOneMenu id="console" value="" >
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Rol"/>
+                        <p:inputText id="txtNameUser"/>
+
+                        <p:outputLabel value="Nombres"/>
+                        <p:inputText id="txtNameUser"/>
+
+                        <p:outputLabel value="Apellidos"/>
+                        <p:inputText id="txtLastnamer"/>
+
+                        <p:outputLabel value="Sexo"/>
+                        <p:selectOneRadio>
+                            <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                            <f:selectItem itemValue="F" itemLabel="Femenino"/>
+                        </p:selectOneRadio>                     
+
+                    </h:panelGrid> 
+
+                    <h:panelGrid columns="2" style="float: left; margin-left: 15px;">
+                        <p:outputLabel value="Usuario"/>
+                        <p:inputText id="txtuser"/>
+
+                        <p:outputLabel value="Contraseña"/>
+                        <p:password id="txtpass1"/>
+
+                        <p:outputLabel value="Confirmación de Contraseña"/>
+                        <p:password id="txtpass2"/>
+
+                    </h:panelGrid> 
+  
+            </h:form>
+            
+         
         </ui:define>      
 
     </ui:composition>	
