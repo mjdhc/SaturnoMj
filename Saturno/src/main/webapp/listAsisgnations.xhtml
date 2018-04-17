@@ -23,6 +23,7 @@
 
             <p:fieldset legend="Lista de Asp y Asignaciones" >
                 <p:dataTable var="assignment" value="#{VListAssignmentController.listAssigments}">
+                    
                     <p:column headerText="Nombre">
                         <h:outputText value="#{assignment.names}" />
                     </p:column>
