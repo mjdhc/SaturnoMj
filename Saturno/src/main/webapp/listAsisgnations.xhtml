@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="./home.xhtml"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:f="http://xmlns.jcp.org/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:pe="http://primefaces.org/ui/extensions">
+        <ui:define name="content">
+            <p:fieldset legend="Asignaciones Guadia y Retén" >
+                <p:outputLabel value="Asisgnación" for="assignment" />
+                <p:selectOneRadio id="assignment" required="true" value="#{VListAssignmentController.flagChecked}">
+                    <f:selectItem itemValue="0" itemLabel="Guardia"/>
+                    <f:selectItem itemValue="1" itemLabel="Retenes"/>
+                </p:selectOneRadio> 
+            </p:fieldset>
+
+            <p:fieldset legend="Lista de Asp y Asignaciones" >
+                <p:dataTable var="assignment" value="#{VListAssignmentController.listAssigments}">
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{assignment.names}" />
+                    </p:column>
+
+                    <p:column headerText="Apellidos">
+                        <h:outputText value="#{assignment.lastname}" />
+                    </p:column>
+
+                    <p:column headerText="Etapas">
+                        <h:outputText value="#{assignment.stages}" />
+                    </p:column>
+
+                    <p:column headerText="Lugar">
+                        <h:outputText value="#{assignment.place}" />
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+
+
+
+
