@@ -5,11 +5,13 @@
  */
 package ec.gob.mj.saturno.ejb;
 
+import ec.gob.mj.saturno.entities.MjLugarT;
 import ec.gob.mj.saturno.entities.VListAssignment;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
 /**
@@ -34,8 +36,34 @@ public class VListAssignmentFacade extends AbstractFacade<VListAssignment> imple
     @Override
     public List<VListAssignment> findListAssignments() {
         TypedQuery<VListAssignment> query = em.createNamedQuery("VListAssignment.findAll", VListAssignment.class);
-        List<VListAssignment> ListAssignments = query.getResultList();        
-       return  ListAssignments;
+        List<VListAssignment> ListAssignments = query.getResultList();
+        return ListAssignments;
     }
+
+    @Override
+    public List<VListAssignment> findListAssignmentsWithParamater(int idGroup) {        
+        List<VListAssignment> ListAssignmentsParam =null;
+        try {
+            StoredProcedureQuery query = em.createNamedStoredProcedureQuery("findByIdGroupProcedure").setParameter("idgroup", idGroup);
+            query.execute();            
+            ListAssignmentsParam=query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            ListAssignmentsParam=null;
+        }
+
+        return ListAssignmentsParam;
+    }
+
+    @Override
+    public List<MjLugarT> listPlaces() {        
+         TypedQuery<MjLugarT> query = em.createNamedQuery("MjLugarT.findAll", MjLugarT.class);
+        List<MjLugarT> ListPlaces = query.getResultList();
+        return ListPlaces;
+    }
+    
+    
+    
+    
 
 }

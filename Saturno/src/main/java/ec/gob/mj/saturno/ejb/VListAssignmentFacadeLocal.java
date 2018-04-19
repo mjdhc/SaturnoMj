@@ -5,6 +5,7 @@
  */
 package ec.gob.mj.saturno.ejb;
 
+import ec.gob.mj.saturno.entities.MjLugarT;
 import ec.gob.mj.saturno.entities.VListAssignment;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,6 +31,8 @@ public interface VListAssignmentFacadeLocal {
 
     int count();
     
-    List<VListAssignment>  findListAssignments();
+    List<VListAssignment>  findListAssignments();    
+    List<VListAssignment>  findListAssignmentsWithParamater(int idGroup);
+    List<MjLugarT> listPlaces();
     
 }

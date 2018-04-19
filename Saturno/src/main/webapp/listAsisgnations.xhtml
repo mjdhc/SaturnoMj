@@ -13,59 +13,92 @@
                     xmlns:p="http://primefaces.org/ui"
                     xmlns:pe="http://primefaces.org/ui/extensions">
         <ui:define name="content">
+            <h:form >
+                <p:growl id="msgs" showDetail="true" />
+                <p:panel header="Select a Location" style="margin-bottom:10px; font-size: 10px;" >
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="jobschedule" value="Distribuciones: " />
+                        <p:selectOneMenu id="jobschedule" value="#{VListAssignmentController.jobschedule}" style="width:150px">
+                            <p:ajax listener="#{VListAssignmentController.onJobScheduleChange}" update="tblAssignment" />
+                            <f:selectItem itemLabel="Seleccione una Distribucion" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{VListAssignmentController.jobSchedules}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>  
 
-            <h:form>
-                <h3 style="margin-top:0">Basic</h3>
-                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                    <p:outputLabel for="console" value="Console:" />
-                    <p:selectOneRadio id="console" value="#{VListAssignmentController.testlabel}">
-                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-                    </p:selectOneRadio>
-                </h:panelGrid>
+                    <p:fieldset legend="Lista de Asp y Asignaciones" >
+                        <p:dataTable  var="assignment" value="#{VListAssignmentController.listAssigments}" id="tblAssignment"  paginator="true" rows="5" 
+                                      editable="true" > 
+                            <f:facet name="header">  
+                                Row Editing  
+                            </f:facet>  
+
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{assignment.names}" />
+                            </p:column>
+
+                            <p:column headerText="Apellidos">
+                                <h:outputText value="#{assignment.lastname}" />
+                            </p:column>
+
+                            <p:column headerText="Etapas">
+                                <h:outputText value="#{assignment.stages}" />
+                            </p:column>
+
+                            <p:column filterBy="#{assignment.place}">  
+                                <f:facet name="header">  
+                                    <h:outputText value="Lugar"/>  
+                                </f:facet>  
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{assignment.place}"/>  
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <p:selectOneMenu value="#{assignment.place}" style="width:100%">  
+                                            <f:selectItems value="#{VListAssignmentController.listplaces}" var="state" itemLabel="#{state}"  
+                                                           itemValue="#{state}"/>  
+                                        </p:selectOneMenu>  
+                                    </f:facet>  
+                                </p:cellEditor>  
+                            </p:column> 
+
+                            <p:column headerText="FechaDesde">
+                                <h:outputText value="#{assignment.datefrom}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="FechaHasta">
+                                <h:outputText value="#{assignment.dateto}" >
+                                     <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
+                                </h:outputText>
+                            </p:column>
 
 
-                
+                            <p:column filterBy="#{assignment.descriptions}">  
+                                <f:facet name="header">  
+                                    <h:outputText value="Observaciones"/>  
+                                </f:facet>  
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{assignment.descriptions}"/>  
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <p:inputText value="#{assignment.descriptions}" style="width:96%"/>  
+                                    </f:facet>  
+                                </p:cellEditor>  
+                            </p:column> 
 
 
-                <p:commandButton value="Submit" update="display" icon="ui-icon-check" oncomplete="PF('dlg').show()"/>
+                            <p:column style="width:6%" exportable="false">  
+                                <p:rowEditor />  
+                            </p:column>  
 
-                <p:dialog modal="true" resizable="false" widgetVar="dlg" header="Values" showEffect="clip">
-                    <p:panelGrid columns="2" id="display" columnClasses="label,value">
-                        <h:outputText value="Console:" />
-                        <h:outputText value="#{VListAssignmentController.testlabel}" />
+                        </p:dataTable>
 
-                      
-                    </p:panelGrid>
-                </p:dialog>
+                    </p:fieldset>
+
+                </p:panel>
             </h:form>
-
-
-
-
-
-            <p:fieldset legend="Lista de Asp y Asignaciones" >
-                <p:dataTable var="assignment" value="#{VListAssignmentController.listAssigments}" id="tblAssignment">
-
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{assignment.names}" />
-                    </p:column>
-
-                    <p:column headerText="Apellidos">
-                        <h:outputText value="#{assignment.lastname}" />
-                    </p:column>
-
-                    <p:column headerText="Etapas">
-                        <h:outputText value="#{assignment.stages}" />
-                    </p:column>
-
-                    <p:column headerText="Lugar">
-                        <h:outputText value="#{assignment.place}" />
-                    </p:column>
-                </p:dataTable>
-            </p:fieldset>
-
         </ui:define>
 
     </ui:composition>
