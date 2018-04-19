@@ -46,7 +46,8 @@ public class VListAssignmentController implements Serializable {
     private VListAssignmentFacadeLocal viewAssignmentEJB;
     private VListAssignment Assignment;
     private List<VListAssignment> listAssigments;
-    private List<MjLugarT> listplaces;
+    private List<String> listplaces;
+    private String  place="select";
     private Integer flagChecked = 0;
 
     private String jobschedule = "Seleccione ";
@@ -58,13 +59,25 @@ public class VListAssignmentController implements Serializable {
 
     //<editor-fold desc="Getters And Setters">
     /*Secction Getters And Setters*/
-    public List<MjLugarT> getListplaces() {
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public List<String> getListplaces() {
         return listplaces;
     }
 
-    public void setListplaces(List<MjLugarT> listplaces) {
+    public void setListplaces(List<String> listplaces) {
         this.listplaces = listplaces;
     }
+    
+    
+   
 
     public String getJobschedule() {
         return jobschedule;
@@ -120,6 +133,8 @@ public class VListAssignmentController implements Serializable {
         System.out.println("Init");
         listAssigments = viewAssignmentEJB.findAll();
         listplaces = viewAssignmentEJB.listPlaces();
+        
+        
         jobSchedules = new HashMap<String, String>();
         jobSchedules.put("Guardia", "Guardia");
         jobSchedules.put("Retenes", "Retenes");

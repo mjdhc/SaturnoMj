@@ -23,6 +23,7 @@
                             <f:selectItem itemLabel="Seleccione una Distribucion" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{VListAssignmentController.jobSchedules}" />
                         </p:selectOneMenu>
+
                     </h:panelGrid>  
 
                     <p:fieldset legend="Lista de Asp y Asignaciones" >
@@ -66,10 +67,10 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
                                 </h:outputText>
                             </p:column>
-                            
+
                             <p:column headerText="FechaHasta">
                                 <h:outputText value="#{assignment.dateto}" >
-                                     <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
                                 </h:outputText>
                             </p:column>
 

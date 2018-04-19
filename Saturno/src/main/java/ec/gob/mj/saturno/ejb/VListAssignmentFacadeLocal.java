@@ -33,6 +33,6 @@ public interface VListAssignmentFacadeLocal {
     
     List<VListAssignment>  findListAssignments();    
     List<VListAssignment>  findListAssignmentsWithParamater(int idGroup);
-    List<MjLugarT> listPlaces();
+    List<String> listPlaces();
     
 }
