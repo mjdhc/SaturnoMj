@@ -49,10 +49,15 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "VListAssignment.findByIdgr", query = "SELECT v FROM VListAssignment v WHERE v.idgr = :idgr")
     , @NamedQuery(name = "VListAssignment.findByTeamGroup", query = "SELECT v FROM VListAssignment v WHERE v.teamGroup = :teamGroup")
     , @NamedQuery(name = "VListAssignment.findByDatefrom", query = "SELECT v FROM VListAssignment v WHERE v.datefrom = :datefrom")
-    , @NamedQuery(name = "VListAssignment.findByDateto", query = "SELECT v FROM VListAssignment v WHERE v.dateto = :dateto")})
+    , @NamedQuery(name = "VListAssignment.findByDateto", query = "SELECT v FROM VListAssignment v WHERE v.dateto = :dateto")
+    , @NamedQuery(name = "VListAssignment.findByRemarks", query = "SELECT v FROM VListAssignment v WHERE v.remarks = :remarks")
+    , @NamedQuery(name = "VListAssignment.findByStatus", query = "SELECT v FROM VListAssignment v WHERE v.status = :status")
+})
 public class VListAssignment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+   
+    //<editor-fold desc="Attributes">
     @Column(name = "id")
     @Id
     private Integer id;
@@ -82,10 +87,21 @@ public class VListAssignment implements Serializable {
     @Column(name = "dateto")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateto;
+    
+    @Size(max = 5000)
+    @Column(name = "remarks")
+    private String remarks;
+    
+    @Column(name = "status")
+    private Boolean status;
 
     public VListAssignment() {
     }
+    
+    //</editor-fold >
 
+    //<editor-fold desc="Setters and Getters">    
+    
     public Integer getId() {
         return id;
     }
@@ -165,5 +181,26 @@ public class VListAssignment implements Serializable {
     public void setDateto(Date dateto) {
         this.dateto = dateto;
     }
+    
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+    
+    
+    //</editor-fold>
+
+    
     
 }

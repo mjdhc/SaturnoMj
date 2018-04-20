@@ -1,7 +1,7 @@
 drop view v_list_assignment
 
 create VIEW v_list_assignment AS 
-select  a.idasignacion as ID ,  asp.nombreasp as names , asp.apellidoasp as lastname,etp.etapas as stages  , l.lugar  as place, l.descripcion as descriptions, gr.idgrupo as idgr, gr.grupo as team_group, a.fechainicio as dateFrom, a.fechafin as dateTo  from mj_asignacion_t a
+select  a.idasignacion as ID ,  asp.nombreasp as names , asp.apellidoasp as lastname,etp.etapas as stages  , l.lugar  as place, l.descripcion as descriptions, gr.idgrupo as idgr, gr.grupo as team_group, a.fechainicio as dateFrom, a.fechafin as dateTo, a.observaciones as remarks, a.estadoasignacion as status from mj_asignacion_t a
 inner join mj_asp_t asp on a.idasp =asp.idasp
 inner join mj_lugar_t l on a.idlugar =l.idlugar
 inner join mj_etapas_t etp on  l.idetapas= etp.idetapas

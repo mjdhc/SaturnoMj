@@ -35,6 +35,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIColumn;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 
 /*end temporal packages*/
@@ -158,6 +159,19 @@ public class VListAssignmentController implements Serializable {
         } else {
             jobschedule = "Guardia";
         }
+    }
+    
+    
+    public void onRowEdit(RowEditEvent event) {
+        System.out.println("onRowEdit");
+        FacesMessage msg = new FacesMessage("Registro Editado", ""+((VListAssignment) event.getObject()).getId());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edición Cancelada", ""+((VListAssignment) event.getObject()).getId());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     //</editor-fold>
