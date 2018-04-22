@@ -57,11 +57,14 @@
                                         <h:outputText value="#{assignment.place}"/>  
                                     </f:facet>  
                                     <f:facet name="input">  
-                                        <p:selectOneMenu value="#{assignment.place}" style="width:100%">  
-                                            <f:selectItems value="#{VListAssignmentController.listplaces}" var="state" itemLabel="#{state}"  
-                                                           itemValue="#{state}"/>  
+                                        <p:selectOneMenu value="#{assignment.place}" style="width:100%" id="selectedOne"  > 
+                                            
+                                            <p:ajax   event="change" listener="#{VListAssignmentController.setPlaceOnchage}" update="selectedOne"/>
+                                            <f:attribute name="placekey" value="#{place.lugar}" />
+                                            <f:selectItems value="#{mjLugarTController.listPlacesAll}" var="place" itemLabel="#{place.lugar}"  
+                                                           itemValue="#{place.lugar}"/>                                             
                                         </p:selectOneMenu>  
-                                    </f:facet>  
+                                    </f:facet>   
                                 </p:cellEditor>  
                             </p:column> 
 
@@ -112,7 +115,7 @@
                             </p:column>
 
 
-                            <p:column style="width:6%" exportable="false" >  
+                            <p:column style="width:6%" exportable="false" headerText="Reasignación">  
                                 <p:rowEditor />  
                             </p:column>  
 

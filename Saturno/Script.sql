@@ -36,6 +36,18 @@ LANGUAGE 'plpgsql';
 select *from show_assigments(1);
 
 
+--update mj_asignacion_t set  idasp=10, idlugar=4,fechainicio='2015-07-17 22:00:00+00',fechafin='2015-07-18 22:00:00+00',fechaasignacion='2015-07-17 22:00:00+00' ,observaciones='new remarks 2', estadoasignacion=true  where idasignacion=3;
+update mj_asignacion_t set  idlugar=4,observaciones='new remarks 3', estadoasignacion=true  where idasignacion=3;
+
  
 
 
+ 	select  	current_timestamp::timestamp::date + interval '6 hour'
+
+ 	select current_timestamp 
+ 	 
+	select to_char(current_timestamp, 'HH12:MI:SS')
+	
+select to_timestamp('05 Dec 2000', 'DD Mon YYYY')
+
+select current_timestamp::timestamp::date;

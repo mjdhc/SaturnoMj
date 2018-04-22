@@ -18,7 +18,7 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class MjCentroTController implements Serializable{
+public class MjGrupoTController implements Serializable{
     @EJB
     private MjCentroTFacadeLocal centrosEJB;
     private MjCentroT center;

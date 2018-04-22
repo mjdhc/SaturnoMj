@@ -9,7 +9,9 @@ package ec.gob.mj.saturno.controller;
  *
  * @author OIpiales
  */
+import ec.gob.mj.saturno.ejb.MjAsignacionTFacadeLocal;
 import ec.gob.mj.saturno.ejb.VListAssignmentFacadeLocal;
+import ec.gob.mj.saturno.entities.MjAsignacionT;
 import ec.gob.mj.saturno.entities.MjLugarT;
 import ec.gob.mj.saturno.entities.VListAssignment;
 import java.io.Serializable;
@@ -33,23 +35,32 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIColumn;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.event.RowEditEvent;
 
 
 /*end temporal packages*/
 @Named
 @ViewScoped
+@SessionScoped
 public class VListAssignmentController implements Serializable {
 
     @EJB
     private VListAssignmentFacadeLocal viewAssignmentEJB;
+    @EJB
+    private MjAsignacionTFacadeLocal assignmentEJB;
     private VListAssignment Assignment;
     private List<VListAssignment> listAssigments;
-    private List<String> listplaces;
-    private String  place="select";
+    private List<MjLugarT> listplaces;
+    
+    private MjLugarT place;
+
     private Integer flagChecked = 0;
+    private MjAsignacionT assign;
 
     private String jobschedule = "Seleccione ";
     private Map<String, String> jobSchedules;
@@ -60,25 +71,29 @@ public class VListAssignmentController implements Serializable {
 
     //<editor-fold desc="Getters And Setters">
     /*Secction Getters And Setters*/
-
-    public String getPlace() {
-        return place;
+    public MjAsignacionTFacadeLocal getAssignmentEJB() {
+        return assignmentEJB;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setAssignmentEJB(MjAsignacionTFacadeLocal assignmentEJB) {
+        this.assignmentEJB = assignmentEJB;
     }
 
-    public List<String> getListplaces() {
+    public List<MjLugarT> getListplaces() {
         return listplaces;
     }
 
-    public void setListplaces(List<String> listplaces) {
+    public void setListplaces(List<MjLugarT> listplaces) {
         this.listplaces = listplaces;
     }
-    
-    
-   
+
+    public MjAsignacionT getAssign() {
+        return assign;
+    }
+
+    public void setAssign(MjAsignacionT assign) {
+        this.assign = assign;
+    }
 
     public String getJobschedule() {
         return jobschedule;
@@ -123,19 +138,24 @@ public class VListAssignmentController implements Serializable {
     public void setListAssigments(List<VListAssignment> listAssigments) {
         this.listAssigments = listAssigments;
     }
-    
-    //</editor-fold>
 
+    public MjLugarT getPlace() {
+        return place;
+    }
+
+    public void setPlace(MjLugarT place) {
+        this.place = place;
+    }
+
+    //</editor-fold>
     //<editor-fold desc="Construct">
     /*Section Construct */
     @PostConstruct
     public void init() {
-
         System.out.println("Init");
         listAssigments = viewAssignmentEJB.findAll();
         listplaces = viewAssignmentEJB.listPlaces();
-        
-        
+
         jobSchedules = new HashMap<String, String>();
         jobSchedules.put("Guardia", "Guardia");
         jobSchedules.put("Retenes", "Retenes");
@@ -144,7 +164,6 @@ public class VListAssignmentController implements Serializable {
     }
     //</editor-fold>
 
-    
     //<editor-fold desc="Methods">
     /*Methods*/
     public void onJobScheduleChange() {
@@ -160,20 +179,43 @@ public class VListAssignmentController implements Serializable {
             jobschedule = "Guardia";
         }
     }
-    
-    
-    public void onRowEdit(RowEditEvent event) {
-        System.out.println("onRowEdit");
-        FacesMessage msg = new FacesMessage("Registro Editado", ""+((VListAssignment) event.getObject()).getId());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        
-    }
-     
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edición Cancelada", ""+((VListAssignment) event.getObject()).getId());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-    
-    //</editor-fold>
 
+    public void onRowEdit(RowEditEvent event) {
+
+        try {
+             Assignment = (VListAssignment) event.getObject();
+        if (place!=null) {
+             System.out.println(""+place.getIdlugar());
+        }
+        
+        } catch (Exception e) {
+            
+            System.out.println("Error"+e.getMessage());
+        }
+      
+        /* if (assignmentEJB.updateRowRegistres(assign)) {
+            FacesMessage msg = new FacesMessage("Registro Editado", "" + ((MjAsignacionT) event.getObject()).getIdasignacion());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        else
+        {
+            FacesMessage msg= new FacesMessage("Error", "Error al editar el Registro");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }*/
+
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edición Cancelada", "" + ((VListAssignment) event.getObject()).getId());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void setPlaceOnchage(final AjaxBehaviorEvent event) {
+         String h =(String) event.getComponent().getAttributes().get("placekey");
+        
+        System.out.println(" do something: "+h);
+         
+    }
+
+    //</editor-fold>
 }

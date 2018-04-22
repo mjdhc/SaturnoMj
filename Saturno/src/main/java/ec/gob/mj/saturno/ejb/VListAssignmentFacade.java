@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
@@ -57,23 +58,17 @@ public class VListAssignmentFacade extends AbstractFacade<VListAssignment> imple
     }
 
     @Override
-    public List<String> listPlaces() {
-        List<MjLugarT> placesDataSource = null;
-        List<String> listPlaces = null;
+    public List<MjLugarT> listPlaces() {
+        List<MjLugarT> listPlacesAll = null;
+        
         try {
             TypedQuery<MjLugarT> query = em.createNamedQuery("MjLugarT.findAll", MjLugarT.class);
-            placesDataSource = query.getResultList();
-            listPlaces = new ArrayList<String>();
-            for (MjLugarT place : placesDataSource) {
-                listPlaces.add(place.getDescripcion());
-                //System.out.println("" + place.getDescripcion());
-            }
-        } catch (Exception e) {
-            listPlaces = null;
-            System.out.println("Error List places: " + e.getMessage());
-        }
+            listPlacesAll = query.getResultList();           
+           
+        } catch (Exception e) {           
+            System.out.println("Error List places: " + e.getMessage());        }
 
-        return listPlaces;
+        return listPlacesAll;
     }
 
 }
