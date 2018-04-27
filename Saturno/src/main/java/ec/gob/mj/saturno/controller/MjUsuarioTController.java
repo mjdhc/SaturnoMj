@@ -93,8 +93,10 @@ public class MjUsuarioTController implements Serializable {
     public String loginSession() {
         String redirection = null;
         try {
-            if (UsersEJB.login(user) != null) {
-                redirection = "home?faces-redirect=true";
+            if (UsersEJB.login(user) != null) { 
+                this.user=UsersEJB.login(user);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usrSession", user);
+                redirection = "welcome?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "No existe usuario"));
                 redirection = "index";

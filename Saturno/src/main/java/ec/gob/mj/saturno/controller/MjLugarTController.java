@@ -6,6 +6,7 @@
 package ec.gob.mj.saturno.controller;
 
 import ec.gob.mj.saturno.ejb.MjLugarTFacadeLocal;
+import ec.gob.mj.saturno.entities.MjAsignacionT;
 import ec.gob.mj.saturno.entities.MjLugarT;
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -23,42 +25,8 @@ import javax.inject.Named;
 @ViewScoped
 public class MjLugarTController implements Serializable {
 
-    @EJB
-    private MjLugarTFacadeLocal placeEJB;
-    List<MjLugarT> listPlacesAll;
-    private MjLugarT place;
-    //<editor-fold desc="Getters and Setters">
+    
 
-    public List<MjLugarT> getListPlacesAll() {
-        return listPlacesAll;
-    }
-
-    public void setListPlacesAll(List<MjLugarT> listPlacesAll) {
-        this.listPlacesAll = listPlacesAll;
-    }
-
-    public MjLugarTFacadeLocal getPlaceEJB() {
-        return placeEJB;
-    }
-
-    public void setPlaceEJB(MjLugarTFacadeLocal placeEJB) {
-        this.placeEJB = placeEJB;
-    }
-
-    public MjLugarT getPlace() {
-        return place;
-    }
-
-    public void setPlace(MjLugarT place) {
-        this.place = place;
-    }
-    //</editor-fold>
-
-    @PostConstruct
-    public void init() {
-        listPlacesAll = placeEJB.findAll();
-        place = new MjLugarT();
-    }
 
   
 

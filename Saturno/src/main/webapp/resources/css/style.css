@@ -41,15 +41,15 @@ and open the template in the editor.
 }
 
 #logo {
-    width: 26%;
+    width: 17%;
 }
 
 .container_headers_title {
     width: 40%;
     display: inline;
     position: relative;
-    top: -137px;
-    left: 34%;
+    top: -78px;
+    left: 14;
     font-size: 30px;
     font-weight: bold;
     color: #999997;
@@ -61,19 +61,20 @@ and open the template in the editor.
     font-weight: bold;
     color: #999997;
     font-size: 27px;
-    top: -98px;
+    top: -40px;
 }
 
 body>div {
-    margin: 2% auto auto auto;
+
     text-align: -webkit-center
 }
 
 .login_wraper {
-    border: 1px solid #999997;
+    /* border: 1px solid #999997;*/
     border-radius: 10px;
     width: 28%;
-    height: 177px;
+    height: 320px;
+    margin-left: 35%;
 }
 
 #frm_container {

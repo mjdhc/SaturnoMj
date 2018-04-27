@@ -33,7 +33,7 @@ public class MjAsignacionTFacade extends AbstractFacade<MjAsignacionT> implement
 
     @Override
     public Boolean updateRowRegistres(MjAsignacionT asign) {
-        
+        System.out.println("Facade");
         String q = "";
         Boolean flagUpdate = false;
         try {

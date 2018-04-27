@@ -10,8 +10,10 @@ package ec.gob.mj.saturno.controller;
  * @author OIpiales
  */
 import ec.gob.mj.saturno.ejb.MjAsignacionTFacadeLocal;
+import ec.gob.mj.saturno.ejb.MjLugarTFacadeLocal;
 import ec.gob.mj.saturno.ejb.VListAssignmentFacadeLocal;
 import ec.gob.mj.saturno.entities.MjAsignacionT;
+import ec.gob.mj.saturno.entities.MjAspT;
 import ec.gob.mj.saturno.entities.MjLugarT;
 import ec.gob.mj.saturno.entities.VListAssignment;
 import java.io.Serializable;
@@ -40,6 +42,8 @@ import javax.faces.component.UIColumn;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.inject.Inject;
+import org.primefaces.component.message.Message;
 import org.primefaces.event.RowEditEvent;
 
 
@@ -53,11 +57,20 @@ public class VListAssignmentController implements Serializable {
     private VListAssignmentFacadeLocal viewAssignmentEJB;
     @EJB
     private MjAsignacionTFacadeLocal assignmentEJB;
+    @EJB
+    private MjLugarTFacadeLocal placeEJB;
+    List<MjLugarT> listPlacesAll;
+
+    @Inject
+    private MjLugarT place;
+    @Inject
+    private MjAspT asp;
+    @Inject
+    private MjAsignacionT assignmentTbl;
+
     private VListAssignment Assignment;
     private List<VListAssignment> listAssigments;
     private List<MjLugarT> listplaces;
-    
-    private MjLugarT place;
 
     private Integer flagChecked = 0;
     private MjAsignacionT assign;
@@ -71,6 +84,30 @@ public class VListAssignmentController implements Serializable {
 
     //<editor-fold desc="Getters And Setters">
     /*Secction Getters And Setters*/
+    public MjLugarTFacadeLocal getPlaceEJB() {
+        return placeEJB;
+    }
+
+    public void setPlaceEJB(MjLugarTFacadeLocal placeEJB) {
+        this.placeEJB = placeEJB;
+    }
+
+    public List<MjLugarT> getListPlacesAll() {
+        return listPlacesAll;
+    }
+
+    public void setListPlacesAll(List<MjLugarT> listPlacesAll) {
+        this.listPlacesAll = listPlacesAll;
+    }
+
+    public MjAsignacionT getAssignmentTbl() {
+        return assignmentTbl;
+    }
+
+    public void setAssignmentTbl(MjAsignacionT assignmentTbl) {
+        this.assignmentTbl = assignmentTbl;
+    }
+
     public MjAsignacionTFacadeLocal getAssignmentEJB() {
         return assignmentEJB;
     }
@@ -159,6 +196,7 @@ public class VListAssignmentController implements Serializable {
         jobSchedules = new HashMap<String, String>();
         jobSchedules.put("Guardia", "Guardia");
         jobSchedules.put("Retenes", "Retenes");
+        listPlacesAll = placeEJB.findAll();
         //listAssigments=viewAssignmentEJB.findListAssignments();
         //Assignment = new VListAssignment();
     }
@@ -180,41 +218,39 @@ public class VListAssignmentController implements Serializable {
         }
     }
 
-    public void onRowEdit(RowEditEvent event) {
-
-        try {
-             Assignment = (VListAssignment) event.getObject();
-        if (place!=null) {
-             System.out.println(""+place.getIdlugar());
-        }
-        
-        } catch (Exception e) {
-            
-            System.out.println("Error"+e.getMessage());
-        }
-      
-        /* if (assignmentEJB.updateRowRegistres(assign)) {
-            FacesMessage msg = new FacesMessage("Registro Editado", "" + ((MjAsignacionT) event.getObject()).getIdasignacion());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-        else
-        {
-            FacesMessage msg= new FacesMessage("Error", "Error al editar el Registro");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }*/
-
-    }
-
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edición Cancelada", "" + ((VListAssignment) event.getObject()).getId());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+    public void getRowEdit(VListAssignment viewAssigment) {
+        Assignment = viewAssigment;
+        this.assignmentTbl.setIdasignacion(Assignment.getId());
+        this.asp.setIdasp(this.Assignment.getIdasp());
     }
 
     public void setPlaceOnchage(final AjaxBehaviorEvent event) {
-         String h =(String) event.getComponent().getAttributes().get("placekey");
-        
-        System.out.println(" do something: "+h);
-         
+        String h = (String) event.getComponent().getAttributes().get("placekey");
+
+        System.out.println(" do something: " + h);
+
+    }
+
+    public void updateAssigment() {
+        try {
+            assignmentTbl.setIdlugar(place);
+            assignmentTbl.setIdasp(asp);
+            assignmentTbl.setFechainicio(Assignment.getDatefrom());
+            assignmentTbl.setFechafin(Assignment.getDateto());
+            assignmentTbl.setFechaasignacion(Assignment.getDateassignment());
+            assignmentTbl.setEstadoasignacion(Assignment.getStatus());
+            assignmentEJB.edit(assignmentTbl);
+            listAssigments=null;
+             listAssigments=viewAssignmentEJB.viewInnerJoin();        
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito", "Registro Actualizado"));
+
+            /*System.out.println("places id " + assignmentTbl.getIdasignacion() + " " + assignmentTbl.getIdlugar() + " " + assignmentTbl.getObservaciones());*/
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "" + e.getMessage()));
+        }
+
     }
 
     //</editor-fold>

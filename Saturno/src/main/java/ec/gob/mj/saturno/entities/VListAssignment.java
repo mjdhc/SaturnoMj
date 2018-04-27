@@ -78,8 +78,13 @@ public class VListAssignment implements Serializable {
     @Size(max = 100)
     @Column(name = "descriptions")
     private String descriptions;
+    
+    @Column(name = "idasp")
+    private Integer idasp;
+    
     @Column(name = "idgr")
     private Integer idgr;
+    
     @Size(max = 50)
     @Column(name = "team_group")
     private String teamGroup;
@@ -90,6 +95,10 @@ public class VListAssignment implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateto;
     
+    @Column(name="dateassignment")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateassignment;
+    
     @Size(max = 5000)
     @Column(name = "remarks")
     private String remarks;
@@ -99,10 +108,26 @@ public class VListAssignment implements Serializable {
 
     public VListAssignment() {
     }
-    
-    //</editor-fold >
 
-    //<editor-fold desc="Setters and Getters">    
+    public Date getDateassignment() {
+        return dateassignment;
+    }
+
+    //</editor-fold >
+    //<editor-fold desc="Setters and Getters">
+    public void setDateassignment(Date dateassignment) {
+        this.dateassignment = dateassignment;
+    }
+
+    public Integer getIdasp() {
+        return idasp;
+    }
+
+    public void setIdasp(Integer idasp) {
+        this.idasp = idasp;
+    }
+    
+    
     
     public Integer getId() {
         return id;

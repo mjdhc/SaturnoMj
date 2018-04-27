@@ -62,12 +62,15 @@ public class MjAsignacionT implements Serializable {
     private String observaciones;
     @Column(name = "estadoasignacion")
     private Boolean estadoasignacion;
+    
     @JoinColumn(name = "idasp", referencedColumnName = "idasp")
     @ManyToOne
     private MjAspT idasp;
+    
     @JoinColumn(name = "idlugar", referencedColumnName = "idlugar")
     @ManyToOne
     private MjLugarT idlugar;
+    
     @OneToMany(mappedBy = "idasignacion")
     private Collection<MjReasignacionT> mjReasignacionTCollection;
 

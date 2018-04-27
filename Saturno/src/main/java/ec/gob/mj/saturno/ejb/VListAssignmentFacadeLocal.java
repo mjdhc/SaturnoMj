@@ -30,9 +30,12 @@ public interface VListAssignmentFacadeLocal {
     List<VListAssignment> findRange(int[] range);
 
     int count();
-    
-    List<VListAssignment>  findListAssignments();    
-    List<VListAssignment>  findListAssignmentsWithParamater(int idGroup);
+
+    List<VListAssignment> findListAssignments();
+
+    List<VListAssignment> findListAssignmentsWithParamater(int idGroup);
+
     List<MjLugarT> listPlaces();
-    
+
+    List<VListAssignment> viewInnerJoin();
 }

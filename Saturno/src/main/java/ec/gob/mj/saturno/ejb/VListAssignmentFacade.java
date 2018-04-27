@@ -8,6 +8,7 @@ package ec.gob.mj.saturno.ejb;
 import ec.gob.mj.saturno.entities.MjLugarT;
 import ec.gob.mj.saturno.entities.VListAssignment;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -60,15 +61,59 @@ public class VListAssignmentFacade extends AbstractFacade<VListAssignment> imple
     @Override
     public List<MjLugarT> listPlaces() {
         List<MjLugarT> listPlacesAll = null;
-        
+
         try {
             TypedQuery<MjLugarT> query = em.createNamedQuery("MjLugarT.findAll", MjLugarT.class);
-            listPlacesAll = query.getResultList();           
-           
-        } catch (Exception e) {           
-            System.out.println("Error List places: " + e.getMessage());        }
+            listPlacesAll = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Error List places: " + e.getMessage());
+        }
 
         return listPlacesAll;
+    }
+
+    @Override
+    public List<VListAssignment> viewInnerJoin() {
+        VListAssignment assignEntity;
+        List<VListAssignment> listAssigment = null;
+        List<Object[]> list_assignment = null;
+        String _query;
+        try {
+
+            _query = ""
+                    + "select *from v_list_assignment   "
+                    + "";
+            Query query = em.createNativeQuery(_query);
+            list_assignment = query.getResultList();
+            listAssigment = new ArrayList<VListAssignment>();
+            for (Object[] assign : list_assignment) {
+
+                assignEntity = new VListAssignment();
+                assignEntity.setId((Integer) assign[0]);            //id
+                assignEntity.setId((Integer) assign[1]);            //idasp
+                assignEntity.setNames(assign[2].toString());        //names
+                assignEntity.setLastname(assign[3].toString());     //lastname
+                assignEntity.setStages(assign[4].toString());       //stages
+                assignEntity.setPlace(assign[5].toString());        //places
+                assignEntity.setDescriptions(assign[6].toString()); //descriptions               
+                assignEntity.setIdgr((Integer) assign[7]);          //idgr
+                assignEntity.setTeamGroup(assign[8].toString());    //team_group
+                assignEntity.setDatefrom((Date) assign[9]);         //datefrom
+                assignEntity.setDateto((Date) assign[10]);          //dateto               
+                assignEntity.setDateassignment((Date) assign[11]);  //dateassignment
+                assignEntity.setRemarks(assign[12].toString());     //remarks
+                assignEntity.setStatus((Boolean) assign[13]);       //status
+                listAssigment.add(assignEntity);
+                /*System.out.println("Id: "+assign[0].toString()+" name: "+assign[2].toString());*/
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+
+        }
+        return listAssigment;
     }
 
 }
