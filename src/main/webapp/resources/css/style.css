@@ -1,0 +1,100 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 12, 2018, 5:42:24 PM
+    Author     : OIpiales
+*/
+
+/**{
+    border: 1px  solid red;
+}*/
+
+#footer {
+    height: 30px;
+    margin: 0 auto;
+    padding: 0px 0 5px 0;
+    background: #D8E7FE;
+    border-top: 1px solid #D3DEF0;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 0;
+    bottom: 35px;
+    left: 0;
+    text-align: center;
+}
+
+#footer p {
+    margin: 0;
+    padding-top: 20px;
+    line-height: normal;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #A0A0A0;
+}
+
+#footer a {
+    color: #5389E0;
+}
+
+#logo {
+    width: 17%;
+}
+
+.container_headers_title {
+    width: 40%;
+    display: inline;
+    position: relative;
+    top: -52px;
+    left: 14;
+    font-size: 30px;
+    font-weight: bold;
+    color: #999997;
+}
+
+.container_headers_title2 {
+    position: relative;
+    display: inline;
+    font-weight: bold;
+    color: #999997;
+    font-size: 27px;
+    top: -16px;
+}
+
+body>div {
+
+    /*text-align: -webkit-center*/
+}
+
+.login_wraper {
+    /* border: 1px solid #999997;*/
+    border-radius: 10px;
+    width: 28%;
+    height: 320px;
+    margin-left: 35%;
+}
+
+#frm_container {
+    margin-top: 41px;
+}
+
+.conatainer_image {
+    border-bottom: 1px solid #999997;
+}
+
+#conten-general{
+    margin-top: -8px;
+}
+
+#imgWelcome{
+    
+    width: 135%
+}
+
+#contentButtons{
+    text-align: right;
+    
+}

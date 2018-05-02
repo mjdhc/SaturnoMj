@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+
+        <title>Saturno</title>
+        <f:event type="preRenderView" listener="#{templateController.checkSession()}"/>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <h:outputStylesheet library="css" name="style.css"/>                            
+
+                <div class="" id="container_header">
+                    <p:graphicImage id="logo" value="/resources/images/minjusticia.jpg" />
+                    <div class="container_headers_title">
+                        <span style="margin-left: 99px;">SISTEMA DE ASIGNACIÓN DE TURNOS ASP</span>
+                    </div>
+                    <div class="container_headers_title2">
+                        <span style="margin-left: -442px;">SATURNO</span>
+                    </div>
+                </div>
+
+                
+            </ui:insert>
+        </div>
+        <div id="conten-general">
+            <div id="left" style="font-size: 11px;" >
+                <ui:insert name="left" >
+                    <h:form>
+                        <p:accordionPanel style="font-size:10px" >
+
+                            <p:tab title="Distribución y Asignación de Asp">
+                                <a href="listAsisgnations.xhtml" data-toggle="collapse"
+                                   data-target="#lavelUser"><i class="fa fa-male"></i>Asignación
+                                    de Turnos</a>
+                            </p:tab>
+                           
+
+                        </p:accordionPanel>
+                        
+                         <p:accordionPanel style="font-size:10px" >
+
+                         
+                            <p:tab title="Aprobación Asignación de Asp">
+                                <a href="asisgmentApprobedd.xhtml" data-toggle="collapse"
+                                   data-target="#lavelUser"><i class="fa fa-male"></i>Aprobación Turnos</a>
+                            </p:tab>
+
+                        </p:accordionPanel>
+                        
+
+                        <p:accordionPanel style="font-size:10px" >
+
+                            <p:tab title="Administración">
+                                <a href="users.xhtml" data-toggle="collapse"
+                                   data-target="#lavelUser"><i class="fa fa-male"></i>Usuarios</a><br></br>
+                                <a href="centers.xhtml" data-toggle="collapse"
+                                   data-target="#lavelUser"><i class="fa fa-male"></i>Centros</a> 
+
+                            </p:tab>
+
+
+
+
+                        </p:accordionPanel>
+
+
+
+                    </h:form> 
+
+
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">Content</ui:insert>
+
+            </div>
+        </div>
+
+
+    </h:body>
+
+</html>

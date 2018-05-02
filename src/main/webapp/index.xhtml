@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Ministerio de Justicia</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="style.css"/>
+       <!-- <h:outputScript library="js" name="script_test.js" />-->
+    </h:head>
+
+    <body>
+
+
+        <header>
+             <h:outputStylesheet library="css" name="style.css"/>                            
+
+                <div class="" id="container_header">
+                    <p:graphicImage id="logo" value="/resources/images/minjusticia.jpg" />
+                    <div class="container_headers_title">
+                        <span style="margin-left: 99px;">SISTEMA DE ASIGNACIÓN DE TURNOS ASP</span>
+                    </div>
+                    <div class="container_headers_title2">
+                        <span style="margin-left: -442px;">SATURNO</span>
+                    </div>
+                </div>
+        </header>
+
+
+        <div class="login_wraper">
+            <h:form>
+                <p:growl id="msgs" showDetail="true" />
+                <p:messages autoUpdate=""/>
+                <p:panel header="Ingrese su clave y contraseña" style="margin-bottom:10px;">
+                    <h:panelGrid columns="2" cellpadding="4">
+
+                        <p:outputLabel for="username" value="Usuario:" />
+                        <p:inputText id="username" value="#{mjUsuarioTController.user.usuario}" required="true"
+                                     label="usuario" />
+
+                        <p:outputLabel for="password" value="Contraseña: " />
+                        <p:password id="password" value="#{mjUsuarioTController.user.clave}" required="true" label="Contraseña"/>
+                        <h:column/>
+                        <p:commandButton value="Ingresar" update="msgs"
+                                         action="#{mjUsuarioTController.loginSession()}" 
+                                         icon="ui-icon-check" />
+                    </h:panelGrid>
+                    <p:separator />
+                </p:panel>
+            </h:form>
+
+
+
+        </div>
+
+
+
+        <div id="footer">
+            <p>
+                <b>Copyright (c) 2018 Sistema todos los derechos reservados. </b> <a
+                    href="http://www.justicia.gob.ec">Ministerio de Justicia,
+                    Derechos Humanos y Cultos | Ecuador </a>.
+            </p>
+        </div>
+
+
+
+
+
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                } else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+    </body>
+
+
+</html>

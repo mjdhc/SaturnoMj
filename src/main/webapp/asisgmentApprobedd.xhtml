@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+        <ui:composition template="master.xhtml"
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        xmlns:h="http://xmlns.jcp.org/jsf/html"
+                        xmlns:f="http://xmlns.jcp.org/jsf/core"
+                        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        xmlns:p="http://primefaces.org/ui"
+                        xmlns:pe="http://primefaces.org/ui/extensions"
+                        >
+
+            <ui:define name="content">
+                <h:form id="form" >
+
+                    <p:growl id="msgs" showDetail="true" />
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="jobschedule" value="Distribuciones: " />
+                        <p:selectOneMenu id="jobschedule" value="#{VListAssignmentController.jobschedule}" style="width:150px">
+                            <p:ajax listener="#{VListAssignmentController.onJobScheduleChange}" update="tblAssignment" />
+                            <f:selectItem itemLabel="Seleccione una Distribucion" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{VListAssignmentController.jobSchedules}" />
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>  
+                    <div id="contentButtons">
+                        <p:commandButton value="Aprobar" id="btnApprove" actionListener="#{VListAssignmentController.approveListAssignement()}" update="form" />
+
+
+                    </div>
+
+
+
+
+                    <p:fieldset legend="Lista de Asp y Asignaciones" >
+                        <h:commandLink>                           
+                            <h:graphicImage   url="/resources/icons/excel.png" width="24" />
+                            <p:dataExporter type="xls" target="tblAssignment" fileName="Asignaciones" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <h:graphicImage   url="/resources/icons/pdf.png" width="24" />
+                            <p:dataExporter type="pdf" target="tblAssignment" fileName="Asignaciones"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <h:graphicImage   url="/resources/icons/csv.png" width="24" />
+                            <p:dataExporter type="csv" target="tblAssignment" fileName="cars" />
+                        </h:commandLink>
+
+                        <p:dataTable  var="assignment" value="#{VListAssignmentController.listAssigments}" id="tblAssignment"  paginator="true" rows="5" 
+                                      > 
+                            <f:facet name="header">  
+                                Asignaciones
+                            </f:facet>  
+
+                            <p:column headerText="Nro." >
+                                <h:outputText value="#{assignment.id}" />
+                            </p:column>
+
+                            
+                            <p:column headerText="Nombre" sortBy="#{assignment.names}">
+                                <h:outputText value="#{assignment.names}" />
+                            </p:column>
+
+                            <p:column headerText="Apellidos" sortBy="#{assignment.lastname}">
+                                <h:outputText value="#{assignment.lastname}" />
+                            </p:column>
+
+                            <p:column headerText="Etapas">
+                                <h:outputText value="#{assignment.stages}" />
+                            </p:column>
+
+                            <p:column headerText="Lugar">
+                                <h:outputText value="#{assignment.place}" />
+                            </p:column>                                
+
+                            <p:column headerText="FechaDesde">
+                                <h:outputText value="#{assignment.datefrom}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="FechaHasta">
+                                <h:outputText value="#{assignment.dateto}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="FechaAsisgnación">
+                                <h:outputText value="#{assignment.dateassignment}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy hh:mm a" />
+                                </h:outputText>
+                            </p:column>
+
+
+                            <p:column filterBy="#{assignment.descriptions}">  
+                                <f:facet name="header">  
+                                    <h:outputText value="Descripción"/>  
+                                </f:facet>  
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{assignment.descriptions}"/>  
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <p:inputText value="#{assignment.descriptions}" style="width:96%"/>  
+                                    </f:facet>  
+                                </p:cellEditor>  
+                            </p:column> 
+
+                            <p:column filterBy="#{assignment.remarks}">  
+                                <f:facet name="header">  
+                                    <h:outputText value="Observaciones"/>  
+                                </f:facet>  
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{assignment.remarks}"/>  
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <p:inputText value="#{assignment.remarks}" style="width:96%"/>  
+                                    </f:facet>  
+                                </p:cellEditor>  
+                            </p:column>
+
+
+                            <p:column headerText="Estado">
+                                <h:outputText value="#{assignment.status}" />
+                            </p:column>                           
+
+                        </p:dataTable>
+
+                    </p:fieldset>
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
