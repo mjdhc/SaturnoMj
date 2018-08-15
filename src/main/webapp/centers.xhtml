@@ -3,100 +3,92 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <ui:composition template="./home.xhtml"
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:h="http://xmlns.jcp.org/jsf/html"
-                    xmlns:f="http://xmlns.jcp.org/jsf/core"
-                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                    xmlns:p="http://primefaces.org/ui"
-                    xmlns:pe="http://primefaces.org/ui/extensions">	
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+
+    <body>
+
+        <ui:composition template="./master.xhtml"
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        xmlns:h="http://xmlns.jcp.org/jsf/html"
+                        xmlns:f="http://xmlns.jcp.org/jsf/core"
+                        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        xmlns:p="http://primefaces.org/ui"
+                        xmlns:pe="http://primefaces.org/ui/extensions">
+
+            <ui:define name="content">
+                <p:fieldset legend="Datos del Centro de Rehabilitación Social">
+
+                    <h:form id="form1">
+
+                        <p:messages id="messages" />
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <p:outputLabel for="txtNameCenter" value="Nombre:" />
+                            <p:inputText value="#{mjCentroTController.center.nombrecentro}" id="txtNameCenter" required="true"/> 
+                            <p:message for="txtNameCenter" />
+
+                            <p:outputLabel for="txtDescriptionCenter" value="Dirección:" />
+                            <p:inputText value="#{mjCentroTController.center.desccentro}" id="txtDescriptionCenter" required="true"/> 
+                            <p:message for="txtDescriptionCenter" />
 
 
-        <ui:define name="content">
-            <p:fieldset legend="Datos del Centro de Rehabilitación Social">
+                            <p:outputLabel for="statusCenter" value="Estado:" />
+                            <p:inputText value="#{mjCentroTController.center.estadocentro}" id="statusCenter" /> 
 
-                <h:form id="form1">
+                        </h:panelGrid>
+                        <h:column/>
+                        <p:commandButton actionListener="#{mjCentroTController.register()}" icon="ui-icon-check" value="Crear" update=":form:tblCenters"/>
 
-                    <p:messages id="messages" />
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <p:outputLabel for="txtNameCenter" value="Nombre:" />
-                        <p:inputText value="#{mjGrupoTController.center.nombrecentro}" id="txtNameCenter" required="true"/> 
-                        <p:message for="txtNameCenter" />
+                    </h:form>
+                </p:fieldset>
 
-                        <p:outputLabel for="txtDescriptionCenter" value="Dirección:" />
-                        <p:inputText value="#{mjGrupoTController.center.desccentro}" id="txtDescriptionCenter" required="true"/> 
-                        <p:message for="txtDescriptionCenter" />
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true"/>
 
+                    <p:dataTable id="tblCenters" var="center" value="#{mjCentroTController.listCenters}" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Centros
+                        </f:facet>
 
-                        <p:outputLabel for="statusCenter" value="Estado:" />
-                        <p:inputText value="#{mjGrupoTController.center.estadocentro}" id="statusCenter" /> 
+                        <p:ajax event="rowEdit" listener="#{mjCentroTController.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{mjCentroTController.onRowCancel}" update=":form:msgs" />
 
-                    </h:panelGrid>
-                    <h:column/>
-                    <p:commandButton actionListener="#{mjGrupoTController.register()}" icon="ui-icon-check" value="Crear"/>
+                        <p:column headerText="Id">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{center.idcentro}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{center.idcentro}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
+                        <p:column headerText="Nombre">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{center.nombrecentro}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{center.nombrecentro}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Descripción">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{center.desccentro}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{center.desccentro}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                         <p:column headerText="Estado">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{center.estadocentro}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{center.estadocentro}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                    </p:dataTable>
                 </h:form>
-            </p:fieldset>
+            </ui:define>
 
-            <h:form id="form">
-                <p:growl id="msgs" showDetail="true"/>
+        </ui:composition>
 
-                <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
-                    <f:facet name="header">
-                        Row Editing
-                    </f:facet>
-
-                    <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
-                    <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
-
-                    <p:column headerText="Id">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Year">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{car.year}" style="width:100%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Brand">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
-                            <f:facet name="input">
-                                <h:selectOneMenu value="#{car.brand}" style="width:100%">
-                                    <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
-                                </h:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Color">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
-                            <f:facet name="input">
-                                <h:selectOneMenu value="#{car.color}" style="width:100%">
-                                    <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
-                                </h:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
-                </p:dataTable>
-
-                
-
-               
-
-            </h:form>
-        </ui:define>
-    </ui:composition>
+    </body>
 </html>
-

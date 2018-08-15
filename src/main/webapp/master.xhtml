@@ -8,8 +8,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="default.css"/>
-        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
 
         <title>Saturno</title>
         <f:event type="preRenderView" listener="#{templateController.checkSession()}"/>
@@ -20,74 +19,137 @@
         <div id="top">
             <ui:insert name="top">
                 <h:outputStylesheet library="css" name="style.css"/>                            
+                <h:outputStylesheet library="css" name="default.css"/>
+                <h:outputStylesheet library="css" name="cssLayout.css"/>
+               
 
-                <div class="" id="container_header">
-                    <p:graphicImage id="logo" value="/resources/images/minjusticia.jpg" />
-                    <div class="container_headers_title">
-                        <span style="margin-left: 99px;">SISTEMA DE ASIGNACIÓN DE TURNOS ASP</span>
-                    </div>
-                    <div class="container_headers_title2">
-                        <span style="margin-left: -442px;">SATURNO</span>
-                    </div>
-                </div>
 
-                
             </ui:insert>
         </div>
         <div id="conten-general">
             <div id="left" style="font-size: 11px;" >
                 <ui:insert name="left" >
-                    <h:form>
-                        <p:accordionPanel style="font-size:10px" >
-
-                            <p:tab title="Distribución y Asignación de Asp">
-                                <a href="listAsisgnations.xhtml" data-toggle="collapse"
-                                   data-target="#lavelUser"><i class="fa fa-male"></i>Asignación
-                                    de Turnos</a>
-                            </p:tab>
-                           
-
-                        </p:accordionPanel>
+                      <!-- SideBar -->
+        <section class="full-box cover dashboard-sideBar">
+            <div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
+            <div class="full-box dashboard-sideBar-ct">
+                <!--SideBar Title -->
+                <div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
+                 ASP SATURNO<i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+                </div>
+                <!-- SideBar User info -->
+                <div class="full-box dashboard-sideBar-UserInfo">
+                    <figure class="full-box">
+                        <p:graphicImage id="logo" value="/resources/assets/img/avatar.jpg" />
                         
-                         <p:accordionPanel style="font-size:10px" >
-
-                         
-                            <p:tab title="Aprobación Asignación de Asp">
-                                <a href="asisgmentApprobedd.xhtml" data-toggle="collapse"
-                                   data-target="#lavelUser"><i class="fa fa-male"></i>Aprobación Turnos</a>
-                            </p:tab>
-
-                        </p:accordionPanel>
-                        
-
-                        <p:accordionPanel style="font-size:10px" >
-
-                            <p:tab title="Administración">
-                                <a href="users.xhtml" data-toggle="collapse"
-                                   data-target="#lavelUser"><i class="fa fa-male"></i>Usuarios</a><br></br>
-                                <a href="centers.xhtml" data-toggle="collapse"
-                                   data-target="#lavelUser"><i class="fa fa-male"></i>Centros</a> 
-
-                            </p:tab>
-
-
-
-
-                        </p:accordionPanel>
-
-
-
-                    </h:form> 
+                            <figcaption class="text-center text-titles">User Name</figcaption>
+                    </figure>
+                    <ul class="full-box list-unstyled text-center">
+                        <li>
+                            <a href="#!">
+                                <i class="zmdi zmdi-settings"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#!" class="btn-exit-system">
+                                <i class="zmdi zmdi-power"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- SideBar Menu -->
+                <ul class="list-unstyled full-box dashboard-sideBar-Menu">
+                    <li>
+                        <a href="home.html">
+                            <i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!" class="btn-sideBar-SubMenu">
+                            <i class="zmdi zmdi-case zmdi-hc-fw"></i> Administration <i class="zmdi zmdi-caret-down pull-right"></i>
+                        </a>
+                        <ul class="list-unstyled full-box">
+                            <li>
+                                <a href="period.html"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Period</a>
+                            </li>
+                            <li>
+                                <a href="subject.html"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Subject</a>
+                            </li>
+                            <li>
+                                <a href="section.html"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Section</a>
+                            </li>
+                            <li>
+                                <a href="salon.html"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Salon</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#!" class="btn-sideBar-SubMenu">
+                            <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Users <i class="zmdi zmdi-caret-down pull-right"></i>
+                        </a>
+                        <ul class="list-unstyled full-box">
+                            <li>
+                                <a href="admin.html"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Admin</a>
+                            </li>
+                            <li>
+                                <a href="teacher.html"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Teacher</a>
+                            </li>
+                            <li>
+                                <a href="student.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i> Student</a>
+                            </li>
+                            <li>
+                                <a href="representative.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i> Representative</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#!" class="btn-sideBar-SubMenu">
+                            <i class="zmdi zmdi-card zmdi-hc-fw"></i> Payments <i class="zmdi zmdi-caret-down pull-right"></i>
+                        </a>
+                        <ul class="list-unstyled full-box">
+                            <li>
+                                <a href="registration.html"><i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Registration</a>
+                            </li>
+                            <li>
+                                <a href="payments.html"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Payments</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#!" class="btn-sideBar-SubMenu">
+                            <i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Settings School <i class="zmdi zmdi-caret-down pull-right"></i>
+                        </a>
+                        <ul class="list-unstyled full-box">
+                            <li>
+                                <a href="school.html"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> School Data</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
 
                 </ui:insert>
             </div>
             <div id="content" class="left_content">
+                
                 <ui:insert name="content">Content</ui:insert>
 
             </div>
         </div>
-
+          <!--====== Scripts -->
+        <h:outputScript library="js" name="jquery-3.1.1.min.js" />
+        <script src="/Saturno/resources/js/jquery-3.1.1.min.js"></script>
+        <script src="/Saturno/resources/js/bootstrap.min.js"></script>
+        <script src="/Saturno/resources/js/material.min.js"></script>
+        <script src="/Saturno/resources//js/ripples.min.js"></script>
+        <script src="/Saturno/resources//js/sweetalert2.min.js"></script>
+        <script src="/Saturno/resources//js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="/Saturno/resources/js/main.js"></script>
+        <script>
+            $.material.init();
+        </script>
 
     </h:body>
 

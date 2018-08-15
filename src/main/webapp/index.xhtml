@@ -8,30 +8,61 @@
     <h:head>
         <title>Ministerio de Justicia</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="style.css"/>
-       <!-- <h:outputScript library="js" name="script_test.js" />-->
+        <h:outputStylesheet library="css" name="main.css"/>
+    <!--<h:outputScript library="js" name="script_test.js" />-->
     </h:head>
 
-    <body>
+    <body class="cover" style="background-image: url(/Saturno/resources/assets/img/loginFont.jpg);">
 
 
         <header>
-             <h:outputStylesheet library="css" name="style.css"/>                            
+            <!-- <h:outputStylesheet library="css" name="style.css"/>-->                            
 
-                <div class="" id="container_header">
-                    <p:graphicImage id="logo" value="/resources/images/minjusticia.jpg" />
-                    <div class="container_headers_title">
-                        <span style="margin-left: 99px;">SISTEMA DE ASIGNACIÓN DE TURNOS ASP</span>
-                    </div>
-                    <div class="container_headers_title2">
-                        <span style="margin-left: -442px;">SATURNO</span>
-                    </div>
-                </div>
+            <div class="" id="container_header">
+                <!--<p:graphicImage id="logo" value="/resources/images/minjusticia.jpg" />-->
+
+
+            </div>
         </header>
 
 
         <div class="login_wraper">
-            <h:form>
+
+            <h:form    class="full-box logInForm">
+                <p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
+                <p class="text-center text-muted text-uppercase">Inicia sesión con tu cuenta</p>
+                <div class="form-group label-floating">
+                    <label class="control-label" for="UserEmail">Usuario</label>
+                    <p:inputText  class="form-control" id="UserEmail" value="#{mjUsuarioTController.user.usuario}"/>
+                    <p class="help-block">Escribe Usuario</p>
+                </div>
+                <div class="form-group label-floating">
+                    <label class="control-label" for="UserPass">Contraseña</label>
+                    <p:password class="form-control" id="UserPass" value="#{mjUsuarioTController.user.clave}" />
+                    <p class="help-block">Escribe tú contraseña</p>
+                </div>
+                <div class="form-group text-center">
+
+                    <p:commandButton value="Iniciar sesión" class="btn btn-raised btn-danger"
+                                     action="#{mjUsuarioTController.loginSession()}" 
+                                      />               
+                </div>
+            </h:form>
+            <!--====== Scripts -->
+            <h:outputScript library="js" name="jquery-3.1.1.min.js" />
+            <script src="/Saturno/resources/js/jquery-3.1.1.min.js"></script>
+            <script src="/Saturno/resources/js/bootstrap.min.js"></script>
+            <script src="/Saturno/resources/js/material.min.js"></script>
+            <script src="/Saturno/resources//js/ripples.min.js"></script>
+            <script src="/Saturno/resources//js/sweetalert2.min.js"></script>
+            <script src="/Saturno/resources//js/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script src="/Saturno/resources/js/main.js"></script>
+            <script>
+                $.material.init();
+            </script>
+
+            <!-- preview       -->
+            <!--<h:form>
                 <p:growl id="msgs" showDetail="true" />
                 <p:messages autoUpdate=""/>
                 <p:panel header="Ingrese su clave y contraseña" style="margin-bottom:10px;">
@@ -50,25 +81,11 @@
                     </h:panelGrid>
                     <p:separator />
                 </p:panel>
-            </h:form>
+            </h:form>-->
 
 
 
         </div>
-
-
-
-        <div id="footer">
-            <p>
-                <b>Copyright (c) 2018 Sistema todos los derechos reservados. </b> <a
-                    href="http://www.justicia.gob.ec">Ministerio de Justicia,
-                    Derechos Humanos y Cultos | Ecuador </a>.
-            </p>
-        </div>
-
-
-
-
 
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {

@@ -20,7 +20,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author root
+ * @author OIpiales
  */
 @Stateless
 public class VListAssignmentFacade extends AbstractFacade<VListAssignment> implements VListAssignmentFacadeLocal {
@@ -124,7 +124,7 @@ public class VListAssignmentFacade extends AbstractFacade<VListAssignment> imple
         List<Object[]> list_assignment = null;
         String _query = "SELECT  a.idasignacion as id , asp.idasp as  idasp,asp.nombreasp as names , asp.apellidoasp as lastname,etp.etapas as stages  , "
                 + " l.lugar  as place, l.descripcion as descriptions, gr.idgrupo as idgr, gr.grupo as team_group, a.fechainicio as dateFrom,  "
-                + " a.fechafin as dateTo,a.fechaasignacion as dateassignment, a.observaciones as remarks, a.estadoasignacion as status  "
+                + " a.fechafin as dateTo,a.fechaasignacion as dateassignment, case when (a.observaciones=null) then '' else a.observaciones end as remarks, a.estadoasignacion as status  "
                 + " FROM MjAsignacionT a "
                 + " JOIN a.idasp asp "
                 + " JOIN a.idlugar l "
