@@ -42,6 +42,8 @@ public class MjCentroTController implements Serializable {
     public MjCentroT getCenter() {
         return center;
     }
+    
+    
 
     public void setCenter(MjCentroT center) {
         this.center = center;
